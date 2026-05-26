@@ -207,9 +207,8 @@ export function Hero() {
           variants={itemVariants}
           className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed"
         >
-          I&apos;m Alex Rivera — a full-stack engineer with{' '}
-          <span className="text-slate-300 font-medium">8+ years</span> of experience crafting
-          beautiful, scalable applications that users love.
+          I&apos;m <span className="text-slate-300 font-medium">Nadjib</span> — a full-stack engineer
+          passionate about crafting beautiful, scalable applications that users love.
         </motion.p>
 
         {/* CTA Buttons */}
