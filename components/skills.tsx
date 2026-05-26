@@ -130,7 +130,7 @@ function CategoryCard({ cat, idx }: { cat: typeof skillCategories[0]; idx: numbe
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={handleMouseLeave}
-        style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+        style={{ rotateX, rotateY, transformStyle: 'preserve-3d', willChange: 'transform' }}
         className="relative group"
       >
         {/* Ambient glow behind card */}
@@ -147,7 +147,6 @@ function CategoryCard({ cat, idx }: { cat: typeof skillCategories[0]; idx: numbe
           style={{
             background: 'linear-gradient(135deg, rgba(10,10,25,0.95) 0%, rgba(15,15,35,0.9) 100%)',
             borderColor: isHovered ? `rgba(${cat.accentRgb}, 0.3)` : 'rgba(255,255,255,0.06)',
-            backdropFilter: 'blur(24px)',
             transition: 'border-color 0.4s ease',
           }}
         >
@@ -250,19 +249,19 @@ export function Skills() {
           animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
           transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
           className="absolute top-0 left-1/4 w-[700px] h-[700px] rounded-full blur-[120px]"
-          style={{ background: 'radial-gradient(circle, rgba(109,40,217,0.12) 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle, rgba(109,40,217,0.12) 0%, transparent 70%)', willChange: 'transform' }}
         />
         <motion.div
           animate={{ x: [0, -30, 0], y: [0, 40, 0] }}
           transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut', delay: 5 }}
           className="absolute bottom-0 right-1/4 w-[600px] h-[600px] rounded-full blur-[100px]"
-          style={{ background: 'radial-gradient(circle, rgba(6,182,212,0.1) 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle, rgba(6,182,212,0.1) 0%, transparent 70%)', willChange: 'transform' }}
         />
         <motion.div
           animate={{ x: [0, 20, 0], y: [0, 25, 0] }}
           transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut', delay: 10 }}
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full blur-[80px]"
-          style={{ background: 'radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 70%)', willChange: 'transform' }}
         />
       </div>
 

@@ -1,11 +1,18 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, DM_Serif_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
+  display: 'swap',
+});
+
+const dmSerifDisplay = DM_Serif_Display({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-dm-serif',
   display: 'swap',
 });
 
@@ -35,7 +42,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} antialiased bg-gradient-dark text-slate-200`}>
+      <body className={`${inter.variable} ${dmSerifDisplay.variable} font-sans antialiased bg-gradient-dark text-slate-200`}>
         <div className="aurora-bg" aria-hidden="true" />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
