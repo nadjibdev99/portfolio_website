@@ -7,46 +7,46 @@ const skillCategories = [
   {
     id: 'frontend',
     index: '01',
-    category: 'Frontend Excellence',
-    description: 'Building responsive, accessible, and performant user interfaces with pixel-perfect fidelity.',
+    category: 'Frontend',
+    description: 'Building responsive and accessible user interfaces.',
     accent: '#a78bfa',
     accentRgb: '167, 139, 250',
     gradientFrom: '#7c3aed',
     gradientTo: '#c026d3',
-    skills: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'Redux'],
+    skills: ['React', 'JavaScript', 'HTML', 'CSS', 'Tailwind CSS'],
   },
   {
     id: 'backend',
     index: '02',
-    category: 'Backend Engineering',
-    description: 'Designing scalable APIs, microservices, and robust database architectures under load.',
+    category: 'Backend',
+    description: 'Designing scalable APIs and robust server logic.',
     accent: '#22d3ee',
     accentRgb: '34, 211, 238',
     gradientFrom: '#0891b2',
     gradientTo: '#0ea5e9',
-    skills: ['Node.js', 'Express', 'PostgreSQL', 'MongoDB', 'Redis', 'GraphQL'],
+    skills: ['Node.js', 'Express', 'REST APIs'],
   },
   {
-    id: 'devops',
+    id: 'database',
     index: '03',
-    category: 'Cloud & DevOps',
-    description: 'Automating deployments and managing cloud infrastructure for zero-downtime delivery.',
+    category: 'Database & BaaS',
+    description: 'Managing data storage and backend-as-a-service platforms.',
     accent: '#34d399',
     accentRgb: '52, 211, 153',
     gradientFrom: '#059669',
     gradientTo: '#10b981',
-    skills: ['AWS', 'Docker', 'Kubernetes', 'CI/CD Pipelines', 'Vercel', 'GitHub Actions'],
+    skills: ['Supabase', 'PostgreSQL', 'Prisma'],
   },
   {
-    id: 'arch',
+    id: 'tools',
     index: '04',
-    category: 'Architecture & Tools',
-    description: 'Applying battle-tested patterns in software design and cross-functional collaboration.',
+    category: 'Tools & Platforms',
+    description: 'Utilizing industry-standard tools for version control, design, and deployment.',
     accent: '#fbbf24',
     accentRgb: '251, 191, 36',
     gradientFrom: '#d97706',
     gradientTo: '#f59e0b',
-    skills: ['Git Flow', 'Agile/Scrum', 'TDD & Testing', 'System Design', 'RESTful APIs', 'Micro-frontends'],
+    skills: ['Git', 'GitHub', 'Figma', 'Vercel', 'Postman'],
   },
 ];
 
@@ -124,6 +124,7 @@ function CategoryCard({ cat, idx }: { cat: typeof skillCategories[0]; idx: numbe
       transition={{ duration: 0.8, delay: idx * 0.12, ease: [0.21, 0.47, 0.32, 0.98] }}
       viewport={{ once: true, margin: '-60px' }}
       style={{ perspective: '1200px' }}
+      className="h-full"
     >
       <motion.div
         ref={cardRef}
@@ -131,7 +132,7 @@ function CategoryCard({ cat, idx }: { cat: typeof skillCategories[0]; idx: numbe
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={handleMouseLeave}
         style={{ rotateX, rotateY, transformStyle: 'preserve-3d', willChange: 'transform' }}
-        className="relative group"
+        className="relative group h-full"
       >
         {/* Ambient glow behind card */}
         <motion.div
@@ -143,7 +144,7 @@ function CategoryCard({ cat, idx }: { cat: typeof skillCategories[0]; idx: numbe
 
         {/* Card */}
         <div
-          className="relative overflow-hidden rounded-3xl border"
+          className="relative overflow-hidden rounded-3xl border h-full"
           style={{
             background: 'linear-gradient(135deg, rgba(10,10,25,0.95) 0%, rgba(15,15,35,0.9) 100%)',
             borderColor: isHovered ? `rgba(${cat.accentRgb}, 0.3)` : 'rgba(255,255,255,0.06)',
@@ -329,38 +330,6 @@ export function Skills() {
             <CategoryCard key={cat.id} cat={cat} idx={idx} />
           ))}
         </div>
-
-        {/* Bottom stats bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5 }}
-          viewport={{ once: true }}
-          className="mt-16 flex flex-wrap items-center justify-center gap-8 md:gap-16"
-        >
-          {[
-            { value: '24+', label: 'Technologies mastered' },
-            { value: '4', label: 'Core disciplines' },
-            { value: '∞', label: 'Curiosity remaining' },
-          ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div
-                className="text-3xl font-black mb-1"
-                style={{
-                  background: 'linear-gradient(135deg, #f1f5f9, #94a3b8)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  fontFamily: '"DM Serif Display", Georgia, serif',
-                }}
-              >
-                {stat.value}
-              </div>
-              <div className="text-xs text-slate-500 tracking-wide uppercase font-medium">{stat.label}</div>
-            </div>
-          ))}
-        </motion.div>
-
       </div>
     </section>
   );

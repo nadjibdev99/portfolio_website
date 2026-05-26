@@ -144,6 +144,7 @@ export function Hero() {
         animate={{ x: mousePos.x, y: mousePos.y }}
         transition={{ type: 'spring', stiffness: 60, damping: 20 }}
         aria-hidden="true"
+        style={{ willChange: 'transform' }}
       >
         <div
           className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full opacity-25"
@@ -230,47 +231,6 @@ export function Hero() {
           </a>
         </motion.div>
 
-        {/* Role ticker with blinking cursor */}
-        <motion.div variants={itemVariants} className="flex items-center justify-center gap-3">
-          <span className="text-slate-500 text-sm font-medium">Currently:</span>
-          <div className="relative h-7 overflow-hidden flex items-center">
-            {rolesList.map((role, idx) => (
-              <motion.span
-                key={role}
-                className="absolute text-sm font-semibold text-violet-400 whitespace-nowrap"
-                initial={{ y: 28, opacity: 0 }}
-                animate={{
-                  y: roleIndex === idx ? 0 : -28,
-                  opacity: roleIndex === idx ? 1 : 0,
-                }}
-                transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
-              >
-                {role}
-              </motion.span>
-            ))}
-            <span
-              className="ml-1 inline-block w-0.5 h-4 bg-violet-400 rounded-full"
-              style={{ animation: 'blink-cursor 1s step-end infinite' }}
-            />
-          </div>
-        </motion.div>
-      </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.8 }}
-      >
-        <span className="text-xs text-slate-500 tracking-widest uppercase font-medium">Scroll</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-          className="w-5 h-8 border-2 border-slate-600 rounded-full flex justify-center pt-1.5"
-        >
-          <div className="w-1 h-1.5 bg-slate-400 rounded-full" />
-        </motion.div>
       </motion.div>
     </section>
   );

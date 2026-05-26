@@ -84,21 +84,66 @@ export function Testimonials() {
 
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-center mb-14"
-        >
-          <span className="section-badge mb-4 inline-flex">Testimonials</span>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-100 mt-4">
-            What People Say
-          </h2>
-          <p className="text-slate-400 text-lg mt-4">
+        <div className="mb-16 max-w-2xl mx-auto text-center flex flex-col items-center">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-3 mb-6"
+          >
+            <motion.span
+              animate={{ scaleX: [1, 1.5, 1] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="block h-px w-8"
+              style={{ background: 'linear-gradient(90deg, #a78bfa, #22d3ee)' }}
+            />
+            <span
+              className="text-xs font-semibold tracking-[0.2em] uppercase"
+              style={{ color: '#a78bfa' }}
+            >
+              Testimonials
+            </span>
+            <motion.span
+              animate={{ scaleX: [1, 1.5, 1] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="block h-px w-8"
+              style={{ background: 'linear-gradient(270deg, #a78bfa, #22d3ee)' }}
+            />
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
+            viewport={{ once: true }}
+            className="text-5xl md:text-6xl font-black text-slate-50 leading-[1.05] tracking-tight mb-5"
+            style={{ fontFamily: '"DM Serif Display", Georgia, serif' }}
+          >
+            What People
+            <br />
+            <span
+              style={{
+                background: 'linear-gradient(135deg, #a78bfa 0%, #22d3ee 50%, #34d399 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              Say
+            </span>
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-slate-400 text-lg leading-relaxed"
+          >
             Feedback from colleagues and clients I&apos;ve had the pleasure of working with.
-          </p>
-        </motion.div>
+          </motion.p>
+        </div>
 
         {/* Desktop: 3-column grid */}
         <div className="hidden md:grid grid-cols-3 gap-6 mb-12">
