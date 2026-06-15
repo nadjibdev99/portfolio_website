@@ -107,7 +107,7 @@ function FloatingTextarea({
 const socialLinks = [
   {
     label: 'GitHub',
-    href: 'https://github.com',
+    href: 'https://github.com/nadjib-kn',
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
         <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
@@ -134,7 +134,7 @@ const socialLinks = [
   },
   {
     label: 'Email',
-    href: 'mailto:alex@example.com',
+    href: 'mailto:nadjibde99@gmail.com',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
@@ -145,20 +145,56 @@ const socialLinks = [
 
 export function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setFormData({ name: '', email: '', message: '' });
-      setSubmitted(false);
-    }, 3000);
+    setIsSubmitting(true);
+    setError('');
+
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+
+    if (!accessKey || accessKey === 'YOUR_ACCESS_KEY_HERE') {
+      setError('Please add your Web3Forms access key to .env.local');
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setSubmitted(true);
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        setError(result.message || 'Something went wrong.');
+      }
+    } catch (err) {
+      setError('Failed to send message. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const copyEmail = async () => {
-    await navigator.clipboard.writeText('alex@example.com');
+    await navigator.clipboard.writeText('nadjibde99@gmail.com');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -264,19 +300,33 @@ export function Contact() {
               required
             />
 
+            {error && (
+              <p className="text-red-400 text-sm font-medium px-2">{error}</p>
+            )}
+
             <motion.button
               type="submit"
               id="contact-submit"
-              disabled={submitted}
-              whileHover={!submitted ? { scale: 1.02, y: -1 } : {}}
-              whileTap={!submitted ? { scale: 0.98 } : {}}
+              disabled={isSubmitting || submitted}
+              whileHover={!(isSubmitting || submitted) ? { scale: 1.02, y: -1 } : {}}
+              whileTap={!(isSubmitting || submitted) ? { scale: 0.98 } : {}}
               className={`shimmer-btn w-full px-6 py-3.5 rounded-xl font-semibold text-white transition-all duration-300 ${
                 submitted
                   ? 'bg-green-600/80 cursor-not-allowed'
+                  : isSubmitting
+                  ? 'bg-violet-600/50 cursor-wait'
                   : 'bg-gradient-to-r from-violet-600 to-violet-500 hover:from-violet-500 hover:to-violet-400 hover:shadow-xl hover:shadow-violet-500/40'
               }`}
             >
-              {submitted ? (
+              {isSubmitting ? (
+                <span className="flex items-center justify-center gap-2">
+                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Sending...
+                </span>
+              ) : submitted ? (
                 <span className="flex items-center justify-center gap-2">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -302,9 +352,9 @@ export function Contact() {
               <h3 className="text-lg font-bold text-slate-100">Direct Contact</h3>
               <div className="space-y-3">
                 {[
-                  { label: 'Email', value: 'alex@example.com', icon: '✉' },
-                  { label: 'Phone', value: '+1 (555) 123-4567', icon: '📱' },
-                  { label: 'Location', value: 'San Francisco, CA', icon: '📍' },
+                  { label: 'Email', value: 'nadjibde99@gmail.com', icon: '✉' },
+                  { label: 'Phone', value: '+213 669317294', icon: '📱' },
+                  { label: 'Location', value: 'Algeria', icon: '📍' },
                 ].map((item) => (
                   <div key={item.label} className="flex items-center gap-3 text-sm">
                     <span className="text-base w-5 text-center">{item.icon}</span>

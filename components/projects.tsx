@@ -6,18 +6,19 @@ import { useRef, useState, useCallback } from 'react';
 const projects = [
   {
     index: '01',
-    title: 'Your Project Name',
-    tagline: 'Full-Stack App',
+    title: 'E-Stage DZ',
+    tagline: 'FULL-STACK APP',
     description:
-      'Describe what the app does in 1–2 sentences. What problem does it solve? Who is it for? Keep it simple and direct.',
-    tags: ['React', 'Node.js', 'Supabase', 'Tailwind CSS'],
+      'A comprehensive internship platform connecting Algerian students with companies, featuring three distinct dashboards for students, companies, and administrators. It streamlines the application process from discovery to candidate management.',
+    tags: ['React', 'Node.js / Express', 'PostgreSQL / Prisma', 'Tailwind CSS'],
     accent: '#a78bfa',
     accentRgb: '167, 139, 250',
     gradientFrom: '#7c3aed',
     gradientTo: '#a78bfa',
-    github: '#',
-    live: '#',
+    github: 'https://github.com/nadjib-kn/E-stage_DZ',
+    live: 'https://e-stage-dz.vercel.app',
     visual: 'stack',
+    image: '/e-stage-dz.jpg',
   },
   {
     index: '02',
@@ -134,8 +135,8 @@ function ProjectCard({ project, idx }: { project: typeof projects[number]; idx: 
   const springY = useSpring(mouseY, { stiffness: 120, damping: 20, mass: 0.5 });
 
   // FIX: Only apply rotation when hovered — when isHovered=false, values are 0 so no transform at all
-  const rotateX = useTransform(springY, [-0.5, 0.5], isHovered ? ['4deg', '-4deg'] : ['0deg', '0deg']);
-  const rotateY = useTransform(springX, [-0.5, 0.5], isHovered ? ['-6deg', '6deg'] : ['0deg', '0deg']);
+  const rotateX = useTransform(springY, [-0.5, 0.5], isHovered ? ['2deg', '-2deg'] : ['0deg', '0deg']);
+  const rotateY = useTransform(springX, [-0.5, 0.5], isHovered ? ['-3deg', '3deg'] : ['0deg', '0deg']);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current || !isHovered) return;
@@ -154,8 +155,6 @@ function ProjectCard({ project, idx }: { project: typeof projects[number]; idx: 
     setIsHovered(true);
   }, []);
 
-  const isLarge = idx === 0;
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -165,7 +164,6 @@ function ProjectCard({ project, idx }: { project: typeof projects[number]; idx: 
       // FIX: Larger margin so animation fires well before card enters view (not during scroll)
       viewport={{ once: true, margin: '-40px' }}
       // FIX: No perspective on wrapper — move it to the inner card only, scoped
-      className={isLarge ? 'md:col-span-2' : ''}
       style={{ perspective: '1200px' }}
     >
       <motion.div
@@ -194,148 +192,63 @@ function ProjectCard({ project, idx }: { project: typeof projects[number]; idx: 
             biggest scroll-lag culprit — the browser must re-blur on every scroll
             pixel. Replaced with a solid semi-transparent background. */}
         <div
-          className="relative overflow-hidden rounded-3xl border h-full transition-colors duration-400"
+          className="relative rounded-2xl p-4 md:p-5 flex flex-col h-full transition-colors duration-400"
           style={{
-            background: 'linear-gradient(135deg, rgba(10,10,25,0.98) 0%, rgba(18,18,40,0.97) 100%)',
-            borderColor: isHovered ? `rgba(${project.accentRgb}, 0.3)` : 'rgba(255,255,255,0.06)',
+            background: '#1e1f36',
+            border: isHovered ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(255,255,255,0.05)',
           }}
         >
-          {/* Top shimmer — FIX: CSS scaleX transition instead of Framer animate */}
-          <div
-            className="absolute top-0 left-0 right-0 h-px origin-left transition-all duration-500"
-            style={{
-              background: `linear-gradient(90deg, transparent, rgba(${project.accentRgb}, 0.8), transparent)`,
-              transform: isHovered ? 'scaleX(1)' : 'scaleX(0)',
-              opacity: isHovered ? 1 : 0,
-            }}
-          />
-
-          <div className={`flex flex-col ${isLarge ? 'md:flex-row' : ''} h-full`}>
-
-            {/* Visual pane */}
+          {/* Visual pane */}
+          <div className="relative w-full h-48 md:h-52 mb-5 rounded-lg overflow-hidden flex items-center justify-center bg-black/40">
+            {/* Ambient glow in the image container using the project's accent color */}
             <div
-              className={`relative flex items-center justify-center overflow-hidden ${
-                isLarge ? 'md:w-2/5 min-h-[200px]' : 'h-44'
-              }`}
-              style={{
-                background: `linear-gradient(135deg, rgba(${project.accentRgb},0.08) 0%, rgba(${project.accentRgb},0.03) 100%)`,
-                borderBottom: isLarge ? 'none' : `1px solid rgba(${project.accentRgb},0.08)`,
-                borderRight: isLarge ? `1px solid rgba(${project.accentRgb},0.08)` : 'none',
-              }}
-            >
-              <div
-                className="absolute top-3 right-5 font-black text-6xl leading-none select-none pointer-events-none"
-                style={{
-                  color: `rgba(${project.accentRgb}, 0.07)`,
-                  fontFamily: '"DM Serif Display", Georgia, serif',
-                }}
-              >
-                {project.index}
-              </div>
-
-              <div className="w-36 h-28">
+              className="absolute inset-0 opacity-20 blur-2xl"
+              style={{ background: `radial-gradient(circle at center, rgba(${project.accentRgb}, 0.8) 0%, transparent 70%)` }}
+            />
+            
+            {(project as any).image ? (
+              <img src={(project as any).image} alt={project.title} className="w-full h-full object-cover relative z-10" />
+            ) : (
+              <div className="w-36 h-28 opacity-70 relative z-10">
                 {project.visual === 'stack' && <VisualStack accent={project.accent} />}
                 {project.visual === 'browser' && <VisualBrowser accent={project.accent} />}
                 {project.visual === 'api' && <VisualApi accent={project.accent} />}
               </div>
-            </div>
+            )}
+          </div>
 
-            {/* Content pane */}
-            <div className="flex flex-col flex-1 p-7 md:p-9">
+          {/* Content pane */}
+          <div className="flex flex-col flex-1">
+            <h3 className="text-xl font-bold text-slate-100 mb-2">
+              {project.title}
+            </h3>
 
-              <div className="flex items-center gap-3 mb-4">
-                <div
-                  className="flex items-center justify-center w-8 h-8 rounded-lg text-xs font-bold flex-shrink-0"
-                  style={{
-                    background: `rgba(${project.accentRgb}, 0.12)`,
-                    color: project.accent,
-                    border: `1px solid rgba(${project.accentRgb}, 0.22)`,
-                  }}
-                >
-                  {project.index}
-                </div>
-                <span
-                  className="text-xs font-semibold tracking-[0.15em] uppercase"
-                  style={{ color: `rgba(${project.accentRgb}, 0.7)` }}
-                >
-                  {project.tagline}
-                </span>
-              </div>
+            <p className="text-sm text-slate-400 leading-relaxed mb-6 line-clamp-3">
+              {project.description}
+            </p>
 
-              <h3
-                className="text-2xl font-black mb-3 leading-tight"
-                style={{
-                  background: `linear-gradient(135deg, #f1f5f9 40%, ${project.accent})`,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  fontFamily: '"DM Serif Display", Georgia, serif',
-                }}
+            <div className="mt-auto flex items-center justify-between pt-2">
+              <a
+                href={project.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors"
               >
-                {project.title}
-              </h3>
+                Live Demo
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
 
-              <div
-                className="mb-4 h-px w-12"
-                style={{ background: `linear-gradient(90deg, rgba(${project.accentRgb},0.5), transparent)` }}
-              />
-
-              <p className="text-sm leading-relaxed mb-5 flex-1" style={{ color: 'rgba(148,163,184,0.9)' }}>
-                {project.description}
-              </p>
-
-              <div className="flex flex-wrap gap-2 mb-6">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1 rounded-full text-xs font-medium"
-                    style={{
-                      background: `rgba(${project.accentRgb}, 0.07)`,
-                      color: `rgba(${project.accentRgb}, 0.85)`,
-                      border: `1px solid rgba(${project.accentRgb}, 0.15)`,
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              <div
-                className="flex items-center gap-4 pt-5"
-                style={{ borderTop: `1px solid rgba(${project.accentRgb}, 0.1)` }}
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium text-slate-300 bg-white/5 hover:bg-white/10 transition-colors"
               >
-                <a
-                  href={project.github}
-                  className="flex items-center gap-2 text-sm font-medium transition-colors duration-200"
-                  style={{ color: 'rgba(148,163,184,0.7)' }}
-                  onMouseEnter={e => (e.currentTarget.style.color = '#f1f5f9')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(148,163,184,0.7)')}
-                >
-                  <GitHubIcon className="w-4 h-4" />
-                  Source
-                </a>
-
-                <a
-                  href={project.live}
-                  className="ml-auto flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300"
-                  style={{
-                    background: `rgba(${project.accentRgb}, 0.1)`,
-                    color: project.accent,
-                    border: `1px solid rgba(${project.accentRgb}, 0.25)`,
-                  }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLElement).style.background = `rgba(${project.accentRgb}, 0.18)`;
-                    (e.currentTarget as HTMLElement).style.boxShadow = `0 0 20px rgba(${project.accentRgb}, 0.2)`;
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLElement).style.background = `rgba(${project.accentRgb}, 0.1)`;
-                    (e.currentTarget as HTMLElement).style.boxShadow = 'none';
-                  }}
-                >
-                  Live demo
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </a>
-              </div>
+                Details
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
             </div>
           </div>
         </div>
@@ -450,7 +363,7 @@ export function Projects() {
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {projects.map((project, idx) => (
             <ProjectCard key={project.index} project={project} idx={idx} />
           ))}
