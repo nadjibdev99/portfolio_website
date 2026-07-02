@@ -116,7 +116,7 @@ export function Hero() {
   };
 
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section id="hero" className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Particle canvas */}
       <canvas
         ref={canvasRef}
