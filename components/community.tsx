@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 
 const activities = [
   {
@@ -60,11 +59,11 @@ function ActivityCard({ activity, idx }: { activity: typeof activities[number]; 
             className="absolute inset-0 opacity-20 blur-2xl transition-opacity duration-300 group-hover:opacity-40"
             style={{ background: `radial-gradient(circle at center, rgba(${activity.accentRgb}, 0.8) 0%, transparent 70%)` }}
           />
-          <Image
+          <img
             src={activity.image}
             alt={activity.title}
-            fill
-            className="object-contain relative z-10 block transition-transform duration-300 ease-out group-hover:scale-[1.02]"
+            loading="lazy"
+            className="w-full h-full object-contain relative z-10 block transition-transform duration-300 ease-out group-hover:scale-[1.02]"
           />
         </div>
 
