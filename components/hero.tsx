@@ -165,7 +165,7 @@ export function Hero() {
         {/* Headline */}
         <motion.h1
           variants={itemVariants}
-          className="mt-12 md:mt-20 text-5xl md:text-7xl font-extrabold mb-6 leading-[1.08] tracking-tight"
+          className="mt-8 md:mt-12 text-5xl md:text-7xl font-extrabold mb-6 leading-[1.08] tracking-tight"
         >
           <span className="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-400 bg-clip-text text-transparent">
             Building Digital
