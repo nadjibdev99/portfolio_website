@@ -45,6 +45,12 @@ export function Navigation() {
 
   const closeMobile = useCallback(() => setMobileOpen(false), []);
 
+  const scrollToTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setMobileOpen(false);
+  };
+
   return (
     <>
       <nav
@@ -57,6 +63,7 @@ export function Navigation() {
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link
             href="#hero"
+            onClick={scrollToTop}
             className="relative text-xl font-bold bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
           >
             NK
@@ -115,7 +122,7 @@ export function Navigation() {
             <motion.div key="backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden" onClick={closeMobile} />
             <motion.div key="drawer" initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 30, stiffness: 250 }} className="fixed top-0 right-0 bottom-0 z-50 w-72 md:hidden flex flex-col bg-slate-950/95 backdrop-blur-xl border-l border-white/10 shadow-2xl">
               <div className="flex items-center justify-between px-6 py-5 border-b border-white/5">
-                <a href="#hero" onClick={closeMobile} className="text-xl font-bold bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity">NK</a>
+                <a href="#hero" onClick={scrollToTop} className="text-xl font-bold bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity">NK</a>
                 <button onClick={closeMobile} className="w-8 h-8 flex items-center justify-center rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-all" aria-label="Close menu">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
