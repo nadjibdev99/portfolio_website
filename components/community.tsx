@@ -33,10 +33,6 @@ const activities = [
 function ActivityCard({ activity, idx }: { activity: typeof activities[number]; idx: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: idx * 0.1, ease: 'easeOut' }}
-      viewport={{ once: true, margin: '-40px' }}
       whileHover={{ y: -8 }}
       whileTap={{ scale: 0.95 }}
       className="relative group cursor-pointer"
@@ -117,13 +113,7 @@ export function Community() {
       <div className="max-w-5xl mx-auto relative z-10">
         {/* Header */}
         <div className="mb-16 max-w-2xl">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-3 mb-6"
-          >
+          <div className="inline-flex items-center gap-3 mb-6">
             <span
               className="block h-px w-8 origin-left"
               style={{ background: 'linear-gradient(90deg, #a78bfa, #22d3ee)' }}
@@ -134,13 +124,9 @@ export function Community() {
             >
               Community
             </span>
-          </motion.div>
+          </div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
-            viewport={{ once: true }}
+          <h2
             className="text-5xl md:text-6xl font-black text-slate-50 leading-[1.05] tracking-tight mb-5"
             style={{ fontFamily: '"DM Serif Display", Georgia, serif' }}
           >
@@ -156,17 +142,11 @@ export function Community() {
             >
               Activities
             </span>
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-slate-400 text-lg leading-relaxed"
-          >
+          <p className="text-slate-400 text-lg leading-relaxed">
             Hackathons and collaborative experiences that built my skills as a developer and problem-solver.
-          </motion.p>
+          </p>
         </div>
 
         {/* Cards grid */}

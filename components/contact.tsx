@@ -186,13 +186,7 @@ export function Contact() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-16 max-w-2xl mx-auto text-center flex flex-col items-center">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-3 mb-6"
-          >
+          <div className="inline-flex items-center gap-3 mb-6">
             <motion.span
               animate={{ scaleX: [1, 1.5, 1] }}
               transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
@@ -211,13 +205,9 @@ export function Contact() {
               className="block h-px w-8"
               style={{ background: 'linear-gradient(270deg, #a78bfa, #22d3ee)' }}
             />
-          </motion.div>
+          </div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
-            viewport={{ once: true }}
+          <h2
             className="text-5xl md:text-6xl font-black text-slate-50 leading-[1.05] tracking-tight mb-5"
             style={{ fontFamily: '"DM Serif Display", Georgia, serif' }}
           >
@@ -233,27 +223,17 @@ export function Contact() {
             >
               Together
             </span>
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-slate-400 text-lg leading-relaxed"
-          >
+          <p className="text-slate-400 text-lg leading-relaxed">
             Have a project in mind? I&apos;m always interested in hearing about new challenges
             and opportunities.
-          </motion.p>
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {/* Form */}
-          <motion.form
-            initial={{ opacity: 0, x: -28 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
+          <form
             onSubmit={handleSubmit}
             className="space-y-5"
           >
@@ -319,16 +299,10 @@ export function Contact() {
                 'Send Message'
               )}
             </motion.button>
-          </motion.form>
+          </form>
 
           {/* Info panel */}
-          <motion.div
-            initial={{ opacity: 0, x: 28 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="space-y-5"
-          >
+          <div className="space-y-5">
             {/* Direct contact */}
             <div className="glass-card rounded-2xl p-6 space-y-4">
               <h3 className="text-lg font-bold text-slate-100">Direct Contact</h3>
@@ -399,7 +373,7 @@ export function Contact() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
