@@ -176,7 +176,7 @@ export function Contact() {
   };
 
   const copyEmail = async () => {
-    await navigator.clipboard.writeText('nadjibde99@gmail.com');
+    await navigator.clipboard.writeText('nadjibdev99@gmail.com');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -334,7 +334,7 @@ export function Contact() {
               <h3 className="text-lg font-bold text-slate-100">Direct Contact</h3>
               <div className="space-y-3">
                 {[
-                  { label: 'Email', value: 'nadjibde99@gmail.com', icon: '✉' },
+                  { label: 'Email', value: 'nadjibdev99@gmail.com', icon: '✉' },
                   { label: 'Phone', value: '+213 669317294', icon: '📱' },
                   { label: 'Location', value: 'Algeria', icon: '📍' },
                 ].map((item) => (
