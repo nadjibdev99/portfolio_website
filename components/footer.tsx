@@ -136,15 +136,6 @@ export function Footer() {
           >
             © {currentYear} Nadjib Kennouche. All rights reserved.
           </motion.p>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
-            Crafted with{' '}
-            <span className="text-violet-400">♥</span> using React, Next.js &amp; Framer Motion
-          </motion.p>
 
           {/* Back to top */}
           <motion.button
