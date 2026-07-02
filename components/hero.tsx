@@ -12,26 +12,12 @@ interface Particle {
   opacity: number;
 }
 
-const rolesList = [
-  'Front-End Developer',
-  'Learning Backend Dev',
-  'UI/UX Enthusiast',
-  'Web Creator',
-];
+
 
 export function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [roleIndex, setRoleIndex] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const animationIdRef = useRef<number>(0);
-
-  // Role ticker (fixed dep array)
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRoleIndex((prev) => (prev + 1) % rolesList.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []); // rolesList is module-level constant — no dep needed
 
   // Mouse parallax tracking
   const handleMouseMove = useCallback((e: MouseEvent) => {

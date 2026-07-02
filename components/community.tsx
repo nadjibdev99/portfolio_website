@@ -62,6 +62,7 @@ function ActivityCard({ activity, idx }: { activity: typeof activities[number]; 
           <img
             src={activity.image}
             alt={activity.title}
+            loading="lazy"
             className="w-full h-full object-contain relative z-10 block transition-transform duration-300 ease-out group-hover:scale-[1.02]"
           />
         </div>

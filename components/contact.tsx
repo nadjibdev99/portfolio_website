@@ -168,7 +168,7 @@ export function Contact() {
       } else {
         setError(result.message || 'Something went wrong.');
       }
-    } catch (err) {
+    } catch {
       setError('Failed to send message. Please try again later.');
     } finally {
       setIsSubmitting(false);

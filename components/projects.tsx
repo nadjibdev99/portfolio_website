@@ -184,7 +184,7 @@ function ProjectCard({ project, idx }: { project: typeof projects[number]; idx: 
             />
 
             {project.image ? (
-              <img src={project.image} alt={project.title} className="w-full h-auto object-contain relative z-10 block transition-transform duration-300 ease-out group-hover:scale-[1.02]" />
+              <img src={project.image} alt={project.title} loading="lazy" className="w-full h-auto object-contain relative z-10 block transition-transform duration-300 ease-out group-hover:scale-[1.02]" />
             ) : (
               <div className="w-full h-52 md:h-64 flex items-center justify-center opacity-70 relative z-10">
                 {project.visual === 'stack' && <VisualStack accent={project.accent} />}

@@ -10,13 +10,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Nadjib - Full-Stack Developer',
-  description: 'Full-stack developer crafting beautiful, performant digital experiences. Building scalable applications across 40+ projects.',
+  title: 'Nadjib - Front-End Developer',
+  description: 'Front-end developer crafting beautiful, performant digital experiences. Building seamless end-to-end digital experiences.',
   metadataBase: new URL('https://nadjib.dev'),
   openGraph: {
-    title: 'Nadjib - Full-Stack Developer',
+    title: 'Nadjib - Front-End Developer',
     description: 'Building Digital Experiences That Perform',
-    images: [{ url: '/og-image.jpg' }],
   },
   icons: {
     icon: '/icon.svg',
