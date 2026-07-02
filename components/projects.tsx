@@ -1,56 +1,81 @@
 'use client';
 
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { useRef, useState, useCallback } from 'react';
+import { motion } from 'framer-motion';
 
 const projects = [
   {
     index: '01',
     title: 'E-Stage DZ',
-    tagline: 'FULL-STACK APP',
     description:
-      'A comprehensive internship platform connecting Algerian students with companies, featuring three distinct dashboards for students, companies, and administrators. It streamlines the application process from discovery to candidate management.',
-    tags: ['React', 'Node.js / Express', 'PostgreSQL / Prisma', 'Tailwind CSS'],
+      'Engineered a scalable internship platform bridging Algerian students with top companies. Features role-based dashboards, seamless application tracking, and an optimized recruitment pipeline.',
+    tags: [
+      { name: 'React', url: 'https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB' },
+      { name: 'Node.js', url: 'https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white' },
+      { name: 'Express', url: 'https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white' },
+      { name: 'PostgreSQL', url: 'https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white' },
+      { name: 'Prisma', url: 'https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white' },
+      { name: 'Tailwind CSS', url: 'https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white' },
+    ],
     accent: '#a78bfa',
     accentRgb: '167, 139, 250',
-    gradientFrom: '#7c3aed',
-    gradientTo: '#a78bfa',
-    github: 'https://github.com/nadjib-kn/E-stage_DZ',
+    github: 'https://github.com/nadjibdev99/Estage_DZ',
     live: 'https://e-stage-dz.vercel.app',
     visual: 'stack',
-    image: '/e-stage-dz.jpg',
+    image: '/estage.jpg',
   },
   {
     index: '02',
-    title: 'Your Project Name',
-    tagline: 'Frontend Project',
+    title: 'Edusity',
     description:
-      'Describe what this project looks like and what it does. Mention any interesting UI interactions or design decisions you made.',
-    tags: ['React', 'Tailwind CSS', 'Framer Motion'],
+      'Designed and developed a premium landing page for a modern university. Focuses on conversion optimization, smooth scroll animations, and a polished, professional aesthetic.',
+    tags: [
+      { name: 'React', url: 'https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB' },
+      { name: 'Vite', url: 'https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white' },
+      { name: 'CSS3', url: 'https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white' },
+    ],
     accent: '#22d3ee',
     accentRgb: '34, 211, 238',
-    gradientFrom: '#0891b2',
-    gradientTo: '#22d3ee',
-    github: '#',
-    live: '#',
+    github: 'https://github.com/nadjibdev99/edusity',
     visual: 'browser',
+    image: '/edusity.jpg',
   },
   {
     index: '03',
-    title: 'Your Project Name',
-    tagline: 'Full-Stack App',
+    title: 'Portfolio Website',
     description:
-      'Your third project. Could be a personal tool, a clone with a twist, or something you built because you needed it yourself.',
-    tags: ['Node.js', 'Express', 'PostgreSQL', 'Prisma'],
+      'Architected a high-performance personal portfolio leveraging Next.js. Integrates Framer Motion for fluid interactions, a dynamic particle background, and a responsive dark-mode UI.',
+    tags: [
+      { name: 'Next.js', url: 'https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white' },
+      { name: 'React', url: 'https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB' },
+      { name: 'Tailwind CSS', url: 'https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white' },
+      { name: 'Framer Motion', url: 'https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white' },
+    ],
     accent: '#34d399',
     accentRgb: '52, 211, 153',
-    gradientFrom: '#059669',
-    gradientTo: '#34d399',
-    github: '#',
-    live: '#',
-    visual: 'api',
+    github: 'https://github.com/nadjibdev99/portfolio_website',
+    visual: 'browser',
+    image: '/portfolio.jpg',
   },
-] as const;
+  {
+    index: '04',
+    title: 'EcoHack',
+    description:
+      'Collaborated in a fast-paced hackathon to build an AI-powered sustainability platform. Integrates a custom chatbot, localized multilingual support, and a streamlined onboarding flow for students.',
+    tags: [
+      { name: 'Python', url: 'https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white' },
+      { name: 'Node.js', url: 'https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white' },
+      { name: 'React', url: 'https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB' },
+      { name: 'Vite', url: 'https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white' },
+      { name: 'Supabase', url: 'https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white' },
+      { name: 'FastAPI', url: 'https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white' },
+    ],
+    accent: '#f59e0b',
+    accentRgb: '245, 158, 11',
+    github: 'https://github.com/ita27rmp100/EcoHack',
+    visual: 'api',
+    image: '/ecohack.jpg',
+  },
+];
 
 // ─── SVG placeholder visuals ──────────────────────────────────────────────────
 
@@ -125,91 +150,43 @@ function GitHubIcon({ className }: { className?: string }) {
 // FIX 6: Glow uses CSS opacity transition instead of Framer animate (no JS loop)
 
 function ProjectCard({ project, idx }: { project: typeof projects[number]; idx: number }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
-
-  // Stiffer spring = fewer intermediate frames computed = less JS per scroll frame
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { stiffness: 120, damping: 20, mass: 0.5 });
-  const springY = useSpring(mouseY, { stiffness: 120, damping: 20, mass: 0.5 });
-
-  // FIX: Only apply rotation when hovered — when isHovered=false, values are 0 so no transform at all
-  const rotateX = useTransform(springY, [-0.5, 0.5], isHovered ? ['2deg', '-2deg'] : ['0deg', '0deg']);
-  const rotateY = useTransform(springX, [-0.5, 0.5], isHovered ? ['-3deg', '3deg'] : ['0deg', '0deg']);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current || !isHovered) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
-    mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
-  }, [isHovered, mouseX, mouseY]);
-
-  const handleMouseLeave = useCallback(() => {
-    mouseX.set(0);
-    mouseY.set(0);
-    setIsHovered(false);
-  }, [mouseX, mouseY]);
-
-  const handleMouseEnter = useCallback(() => {
-    setIsHovered(true);
-  }, []);
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      // FIX: Simpler easing, no delay stagger (stagger causes multiple animations mid-scroll)
       transition={{ duration: 0.5, ease: 'easeOut' }}
-      // FIX: Larger margin so animation fires well before card enters view (not during scroll)
       viewport={{ once: true, margin: '-40px' }}
-      // FIX: No perspective on wrapper — move it to the inner card only, scoped
-      style={{ perspective: '1200px' }}
+      whileHover={{ y: -8 }}
+      whileTap={{ scale: 0.95 }}
+      className="relative group h-full cursor-pointer"
     >
-      <motion.div
-        ref={cardRef}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        // FIX: Removed `transformStyle: preserve-3d` — promotes every child to its own
-        // compositor layer, massively increasing memory/GPU cost during scroll
-        style={{ rotateX, rotateY }}
-        className="relative group h-full"
-      >
-        {/* Ambient glow — FIX: CSS transition instead of Framer `animate` to avoid
-            a JS animation loop running constantly in the background during scroll */}
-        <div
-          className="absolute -inset-3 rounded-[28px] blur-2xl pointer-events-none transition-opacity duration-500"
-          style={{
-            background: `radial-gradient(ellipse, rgba(${project.accentRgb}, 0.18) 0%, transparent 70%)`,
-            opacity: isHovered ? 1 : 0,
-            // FIX: will-change only set on hover so it doesn't eat VRAM while scrolling
-            willChange: isHovered ? 'opacity' : 'auto',
-          }}
-        />
+      {/* Soft outward glow effect behind the card on hover with a single unified color */}
+      <div 
+        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out pointer-events-none"
+        style={{
+          boxShadow: '0 10px 40px -5px rgba(167, 139, 250, 0.4)'
+        }}
+      />
 
-        {/* Card — FIX: Removed `backdropFilter: blur(24px)`. This is the single
-            biggest scroll-lag culprit — the browser must re-blur on every scroll
-            pixel. Replaced with a solid semi-transparent background. */}
-        <div
-          className="relative rounded-2xl p-4 md:p-5 flex flex-col h-full transition-colors duration-400"
-          style={{
-            background: '#1e1f36',
-            border: isHovered ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(255,255,255,0.05)',
-          }}
-        >
+      <div
+        className="relative rounded-2xl flex flex-col h-full overflow-hidden transition-all duration-300 ease-out"
+        style={{
+          background: '#1e1f36',
+          border: '1px solid rgba(255,255,255,0.05)',
+        }}
+      >
           {/* Visual pane */}
-          <div className="relative w-full h-48 md:h-52 mb-5 rounded-lg overflow-hidden flex items-center justify-center bg-black/40">
-            {/* Ambient glow in the image container using the project's accent color */}
+          <div className="relative w-full flex items-center justify-center bg-black/40">
+            {/* Ambient glow in the image container */}
             <div
-              className="absolute inset-0 opacity-20 blur-2xl"
+              className="absolute inset-0 opacity-20 blur-2xl transition-opacity duration-300 ease-out group-hover:opacity-40"
               style={{ background: `radial-gradient(circle at center, rgba(${project.accentRgb}, 0.8) 0%, transparent 70%)` }}
             />
-            
-            {(project as any).image ? (
-              <img src={(project as any).image} alt={project.title} className="w-full h-full object-cover relative z-10" />
+
+            {project.image ? (
+              <img src={project.image} alt={project.title} className="w-full h-auto object-contain relative z-10 block transition-transform duration-300 ease-out group-hover:scale-[1.02]" />
             ) : (
-              <div className="w-36 h-28 opacity-70 relative z-10">
+              <div className="w-full h-52 md:h-64 flex items-center justify-center opacity-70 relative z-10">
                 {project.visual === 'stack' && <VisualStack accent={project.accent} />}
                 {project.visual === 'browser' && <VisualBrowser accent={project.accent} />}
                 {project.visual === 'api' && <VisualApi accent={project.accent} />}
@@ -218,41 +195,53 @@ function ProjectCard({ project, idx }: { project: typeof projects[number]; idx: 
           </div>
 
           {/* Content pane */}
-          <div className="flex flex-col flex-1">
-            <h3 className="text-xl font-bold text-slate-100 mb-2">
+          <div className="flex flex-col flex-1 p-4 md:p-5">
+            <h3 className="text-lg font-bold text-slate-100 mb-2">
               {project.title}
             </h3>
 
-            <p className="text-sm text-slate-400 leading-relaxed mb-6 line-clamp-3">
+            <p className="text-sm text-slate-400 leading-relaxed mb-4">
               {project.description}
             </p>
 
-            <div className="mt-auto flex items-center justify-between pt-2">
-              <a
-                href={project.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors"
-              >
-                Live Demo
-                <ArrowUpRight className="w-4 h-4" />
-              </a>
+            {/* Tech badges */}
+            <div className="flex flex-wrap gap-1.5 mb-5">
+              {project.tags.map((tag) => (
+                <img
+                  key={tag.name}
+                  src={tag.url}
+                  alt={tag.name}
+                  className="h-6 rounded-[3px] pointer-events-none"
+                />
+              ))}
+            </div>
+
+            {/* Links */}
+            <div className="mt-auto flex items-center gap-5 pt-2">
+              {project.live && project.live !== '#' && (
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 text-sm font-medium text-slate-300 hover:text-white transition-colors"
+                >
+                  <ArrowUpRight className="w-4 h-4" />
+                  Live Demo
+                </a>
+              )}
 
               <a
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium text-slate-300 bg-white/5 hover:bg-white/10 transition-colors"
+                className="flex items-center gap-1.5 text-sm font-medium text-slate-300 hover:text-white transition-colors"
               >
-                Details
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
+                <GitHubIcon className="w-4 h-4" />
+                GitHub
               </a>
             </div>
           </div>
         </div>
-      </motion.div>
     </motion.div>
   );
 }
@@ -302,7 +291,7 @@ export function Projects() {
         }
       `}</style>
 
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="max-w-5xl mx-auto relative z-10">
 
         {/* Header */}
         <div className="mb-20 max-w-2xl">
@@ -358,12 +347,12 @@ export function Projects() {
             viewport={{ once: true }}
             className="text-slate-400 text-lg leading-relaxed"
           >
-            Three projects I&apos;m proud of — each one a real problem solved with clean code and genuine care for the user experience.
+            A few projects I&apos;m proud of — each one a real problem solved with clean code and genuine care for the user experience.
           </motion.p>
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {projects.map((project, idx) => (
             <ProjectCard key={project.index} project={project} idx={idx} />
           ))}

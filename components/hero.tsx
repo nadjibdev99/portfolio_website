@@ -13,10 +13,10 @@ interface Particle {
 }
 
 const rolesList = [
-  'Full-Stack Developer',
-  'Creative Technologist',
-  'UI/UX Engineer',
-  'System Architect',
+  'Front-End Developer',
+  'Learning Backend Dev',
+  'UI/UX Enthusiast',
+  'Web Creator',
 ];
 
 export function Hero() {
@@ -174,13 +174,7 @@ export function Hero() {
         initial="hidden"
         animate="visible"
       >
-        {/* Badge */}
-        <motion.div variants={itemVariants} className="mb-8">
-          <span className="section-badge" style={{ animation: 'pulse-ring 2.5s ease infinite' }}>
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-violet-400" />
-            Welcome to my digital space
-          </span>
-        </motion.div>
+
 
         {/* Headline */}
         <motion.h1
@@ -208,8 +202,8 @@ export function Hero() {
           variants={itemVariants}
           className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed"
         >
-          I&apos;m <span className="text-slate-300 font-medium">Nadjib</span> — a full-stack engineer
-          passionate about crafting beautiful, scalable applications that users love.
+          I&apos;m <span className="text-slate-300 font-medium">Nadjib</span> — a 3rd year Computer Science student at ESTIN, a front-end developer, and currently learning backend dev
+          passionate about crafting beautiful user interfaces and building seamless, end-to-end digital experiences.
         </motion.p>
 
         {/* CTA Buttons */}
