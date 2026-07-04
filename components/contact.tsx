@@ -137,32 +137,21 @@ export function Contact() {
     setIsSubmitting(true);
     setError('');
 
-    const accessKey =
-      process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ||
-      'ebd5e01a-68e9-49f4-b327-948564d899a5';
-
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          access_key: accessKey,
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
       });
 
       const result = await response.json();
-      if (result.success) {
+
+      if (response.ok && result.success) {
         setSubmitted(true);
         setFormData({ name: '', email: '', message: '' });
         setTimeout(() => setSubmitted(false), 5000);
       } else {
-        setError(result.message || 'Something went wrong.');
+        setError(result.error || 'Something went wrong. Please try again.');
       }
     } catch {
       setError('Failed to send message. Please try again later.');
