@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(
+  process.env.RESEND_API_KEY || 're_CGBwaE9v_4aMWFSxRaKMHcaEsxhPhPGDP'
+);
 
 export async function POST(request: Request) {
   try {
@@ -20,13 +22,13 @@ export async function POST(request: Request) {
       replyTo: email,
       subject: `New message from ${name}`,
       html: `
-        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #7c3aed;">New Contact Form Submission</h2>
+        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px;">
+          <h2 style="color: #7c3aed; margin-bottom: 16px;">New Contact Form Submission</h2>
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-          <hr style="border: 1px solid #e2e8f0;" />
+          <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 16px 0;" />
           <p><strong>Message:</strong></p>
-          <p style="white-space: pre-wrap;">${message}</p>
+          <p style="white-space: pre-wrap; color: #374151;">${message}</p>
         </div>
       `,
     });
