@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
 const resend = new Resend(
-  process.env.RESEND_API_KEY || 're_PM2u6qtP_91MsiRNkmyLwyx3m6hCEFWKc'
+  process.env.RESEND_API_KEY || 're_CGBwaE9v_4aMWFSxRaKMHcaEsxhPhPGDP'
 );
 
 export async function POST(request: Request) {
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
 
     const { error } = await resend.emails.send({
       from: 'Portfolio Contact <onboarding@resend.dev>',
-      to: ['nadjibdev99@gmail.com'],
+      to: ['kennouchenadjib@gmail.com'],
       replyTo: email,
       subject: `New message from ${name}`,
       html: `
