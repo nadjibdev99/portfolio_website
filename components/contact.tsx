@@ -137,13 +137,9 @@ export function Contact() {
     setIsSubmitting(true);
     setError('');
 
-    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
-
-    if (!accessKey || accessKey === 'YOUR_ACCESS_KEY_HERE') {
-      setError('Please add your Web3Forms access key to .env.local');
-      setIsSubmitting(false);
-      return;
-    }
+    const accessKey =
+      process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ||
+      'ebd5e01a-68e9-49f4-b327-948564d899a5';
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
